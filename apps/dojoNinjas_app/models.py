@@ -39,6 +39,12 @@ class dojoManager(models.Manager):
         return info
     def __str__(self):
         print "< name:"+ self.name + " city:"+ self.city + " state:"+ self.state  + " >"
+        for each in ninjas.objects.filter(name=self.name):
+            each.__str__()
+    def __repr__(self):
+        print "< name:"+ self.name + " city:"+ self.city + " state:"+ self.state  + " >"
+        for each in ninjas.objects.filter(name=self.name):
+            each.__repr__()
 
 class dojos(models.Model):
     name=models.CharField(max_length=255)
@@ -76,7 +82,9 @@ class ninjaManager(models.Manager):
             info.newDojo = dojos.objects.create(dojo_id = thisDojo, first_name = FirstName, clast_name = LastName)
         return info
     def __str__(self):
-        print "< first_name:" + self.first_name + " last_name:"+ self.last_name + " dojo_id:"+ self.dojo_id.id  + " >"
+        print "  < first_name:" + self.first_name + " last_name:"+ self.last_name + " dojo_id:"+ self.dojo_id.id  + " >"
+    def __repr__(self):
+        print "  < first_name:" + self.first_name + " last_name:"+ self.last_name + " dojo_id:"+ self.dojo_id.id  + " >"
 
 class ninjas(models.Model):
     dojo_id = models.ForeignKey(dojos)
